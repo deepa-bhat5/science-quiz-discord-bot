@@ -7,6 +7,21 @@ import html  # to fix weird characters like &quot;
 import random
 import asyncio
 
+from flask import Flask
+from threading import Thread
+
+app = Flask(__name__)
+
+@app.route('/')
+def home():
+    return "Bot is alive! Hello from Science Quiz Bot"
+
+def run_flask():
+    app.run(host='0.0.0.0', port=8080)  # Important: port 8080 is Replit's default exposed port
+
+# Start Flask in background thread
+Thread(target=run_flask).start()
+
 load_dotenv()                           # ← loads .env file
 TOKEN = os.getenv('DISCORD_TOKEN')      # ← reads from env
 
